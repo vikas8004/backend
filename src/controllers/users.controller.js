@@ -12,7 +12,7 @@ const addUsers = asyncHandler(async (req, res) => {
 });
 
 const getUsers = asyncHandler(async (req, res) => {
-  const users = await User.find();
+  const users = await User.find().select("-__v -_id -createdAt -updatedAt");
   if (!users) {
     throw new errorHandler("something went wrong please try again", 500);
   }
