@@ -1,4 +1,5 @@
 import User from "../models/user.model.js";
+import { ApiResponse } from "../utils/apiResponse.js";
 import { asyncHandler } from "../utils/asyncHandler.js";
 import { errorHandler } from "../utils/erroHandler.js";
 const addUsers = asyncHandler(async (req, res) => {
@@ -7,7 +8,7 @@ const addUsers = asyncHandler(async (req, res) => {
   if (!addedUser) {
     throw new errorHandler("user could not be added", 400);
   }
-  res.status(201).json(addedUser);
+  res.status(201).json(new ApiResponse(200, addedUser));
 });
 
 const getUsers = asyncHandler(async (req, res) => {
@@ -15,7 +16,7 @@ const getUsers = asyncHandler(async (req, res) => {
   if (!users) {
     throw new errorHandler("something went wrong please try again", 500);
   }
-  res.status(200).json(users);
+  res.status(200).json(new ApiResponse(200, users));
 });
 
 export { addUsers, getUsers };
